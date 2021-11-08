@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class HomeController extends ChangeNotifier {
   int selectedBottomTab = 0;
+  int tempo = 29;
 
   void onBottomNavigationTabChange(int index) {
     selectedBottomTab = index;
@@ -32,4 +33,22 @@ class HomeController extends ChangeNotifier {
     isTrunkLock = !isTrunkLock;
     notifyListeners();
   }
+
+  bool isCoolSelected = true;
+
+  void updateCool(){
+    isCoolSelected = !isCoolSelected;
+    notifyListeners();
+  }
+
+  void tempoUp(){
+    tempo = tempo + 1;
+    notifyListeners();
+  }
+
+  void tempoDown(){
+    tempo = tempo -1;
+    notifyListeners();
+  }
+
 }
