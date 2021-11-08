@@ -3,12 +3,15 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tesla_animated_app/constanins.dart';
 import 'package:tesla_animated_app/home_controller.dart';
+import 'package:tesla_animated_app/models/TyrePsi.dart';
 import 'package:tesla_animated_app/screens/components/TempBtn.dart';
 import 'package:tesla_animated_app/screens/components/tempo_detail.dart';
+import 'package:tesla_animated_app/screens/components/type_heat.dart';
 
 import 'components/battery_status.dart';
 import 'components/door_lock.dart';
 import 'components/tesla_bottom_navigationbar.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -241,6 +244,37 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     width: 200,
                                   ),
                           )),
+                      //Tyre heat
+                      _controller.selectedBottomTab == 3 ?
+                      AnimationLimiter(
+                        child: GridView.count(
+                          crossAxisCount: 2,
+                          childAspectRatio:
+                              (constrains.maxWidth) / (constrains.maxHeight),
+                          children: List.generate(
+                            4,
+                            (int index) {
+                              return AnimationConfiguration.staggeredGrid(
+                                position: index,
+                                duration: const Duration(milliseconds: 600),
+                                columnCount: 2,
+                                child: ScaleAnimation(
+                                  curve: Curves.easeInOutBack,
+                                  child: FadeInAnimation(
+                                    child:TyreHeat(
+                                        constrains: constrains,
+                                        temp: demoPsiList[index].temp,
+                                        psi: demoPsiList[index].psi,
+                                        isHeat:
+                                            demoPsiList[index].isLowPressure,
+                                        isFront: demoPsiList[index].isFront),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ) : Container(),
                     ],
                   );
                 },

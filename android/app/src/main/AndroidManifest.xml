@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tesla_animated_app">
    <application
-        android:label="tesla_animated_app"
+        android:label="Tesla Connect"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
